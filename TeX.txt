@@ -3,3 +3,9 @@ https://tug.org/texlive/acquire-netinstall.html
 ./install-tl -no-gui -portable -scheme small
     D 1 <dir>
     O D S
+
+[ghostscript]
+https://ghostscript.com/releases/gsdnld.html
+https://pages.uoregon.edu/koch/
+rm bin/gs-X11; mv bin/gs-noX11 bin/gs
+export GS_LIB=`echo ~/Library/TeX/ghostscript/**/Resource/Init`:`echo ~/Library/TeX/ghostscript/**/lib`
