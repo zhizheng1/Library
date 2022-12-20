@@ -1,6 +1,7 @@
 ~/Library/R
 o=/Library/Frameworks/R.framework; sed -i '' -e "s|$o/Resources|$PWD|g" bin/R etc/Renviron;sed -i '' -e "s/^LIBR .*/LIBR = -lR/g" etc/Makeconf;rm R Info.plist
 l=();for f in bin/exec/R lib/*.dylib modules/* library/*/*/*.so;do [ ! -L $f ] &&otool -L $f|grep "$o\|/opt/X11"|awk '{print $1}'|while read i;do k=lib/${i##*/};[ ! $k = $f ] &&{j=@executable_path/../../$k;echo $f $i $j;install_name_tool -change $i $j $f;l+=($f);cp -n ~/Desktop/$k lib};done;done;codesign -f -s - ${(u)l}
+lib/*.dylib modules/*.so: @executable_path -> @loader_path
 
 [linux]
 apt install g++ gfortran libreadline-dev zlib1g-dev libbz2-dev liblzma-dev libcurl4-openssl-dev libpng-dev libjpeg-dev libtiff-dev libicu-dev libxt-dev libpcre2-dev libpango1.0-dev
